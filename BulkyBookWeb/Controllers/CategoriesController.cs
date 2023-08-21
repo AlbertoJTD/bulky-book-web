@@ -77,7 +77,7 @@ namespace BulkyBookWeb.Controllers
 				context.Categories.Update(category);
 				context.SaveChanges();
 
-				TempData["success"] = "Category edited successfully";
+				TempData["success"] = "Category updated successfully";
 
 				return RedirectToAction("Index");
 			}
