@@ -31,6 +31,13 @@ namespace BulkyBookWeb.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Create(Category category)
 		{
+			if (category.Name == category.DisplayOrder.ToString())
+			{
+				//ModelState.AddModelError("CustomError", "DisplayOrder cannot be the same as Name field");
+				// It will appear at the bottom of the Name field.
+				ModelState.AddModelError("Name", "DisplayOrder cannot be the same as Name field");
+			}
+
 			if (ModelState.IsValid)
 			{
 				context.Categories.Add(category);
