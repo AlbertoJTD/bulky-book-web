@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BulkyBookWeb.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookWeb.Controllers
 {
 	public class CategoriesController : Controller
 	{
-		public IActionResult Index()
+		private readonly ApplicationDbContext context;
+
+		public CategoriesController(ApplicationDbContext context)
+        {
+			this.context = context;
+		}
+
+        public IActionResult Index()
 		{
-			return View();
+			var categories = context.Categories.ToList();
+
+			return View(categories);
 		}
 	}
 }
