@@ -9,14 +9,14 @@ namespace BulkyBookWeb.Controllers
 		private readonly ApplicationDbContext context;
 
 		public CategoriesController(ApplicationDbContext context)
-        {
+		{
 			this.context = context;
 		}
 
-        public IActionResult Index()
+		public IActionResult Index()
 		{
 			//var categories = context.Categories.ToList();
-			IEnumerable <Category> categories = context.Categories;
+			IEnumerable<Category> categories = context.Categories;
 			return View(categories);
 		}
 
@@ -45,6 +45,18 @@ namespace BulkyBookWeb.Controllers
 
 				return RedirectToAction("Index");
 			}
+
+			return View(category);
+		}
+
+		[HttpGet("{id:int}")]
+		public IActionResult Edit(int? id)
+		{
+			if (id == null || id == 0) return NotFound();
+
+			var category = context.Categories.FirstOrDefault(x => x.Id == id);
+
+			if (category == null) return NotFound();
 
 			return View(category);
 		}
